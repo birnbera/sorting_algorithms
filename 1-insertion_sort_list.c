@@ -1,5 +1,7 @@
 #include "sort.h"
 
+void swap(listint_t *, listint_t *);
+
 /**
  * insertion_sort_list - insertion sort for doubly linked list
  * @list: double pointer to head of list
@@ -18,14 +20,7 @@ void insertion_sort_list(listint_t **list)
 		if (head->n > head->next->n)
 		{
 			curr = head->next;
-			if (head->prev != NULL)
-				head->prev->next = curr;
-			if (curr->next != NULL)
-				curr->next->prev = head;
-			head->next = curr->next;
-			curr->prev = head->prev;
-			curr->next = head;
-			head->prev = curr;
+			swap(head, head->next);
 			if (curr->prev == NULL)
 				*list = curr;
 			print_list((const listint_t *) *list);
@@ -34,13 +29,7 @@ void insertion_sort_list(listint_t **list)
 				if (curr->n >= curr->prev->n)
 					break;
 				prev = curr->prev;
-				if (prev->prev != NULL)
-					prev->prev->next = curr;
-				curr->next->prev = prev;
-				prev->next = curr->next;
-				curr->prev = prev->prev;
-				curr->next = prev;
-				prev->prev = curr;
+				swap(prev, curr);
 				if (curr->prev == NULL)
 					*list = curr;
 				print_list((const listint_t *) *list);
@@ -49,4 +38,21 @@ void insertion_sort_list(listint_t **list)
 		else
 			head = head->next;
 	}
+}
+
+/**
+ * swap - function to swap two nodes in a doubly linked list
+ * @left: left node to swap
+ * @right: right node to swap
+ */
+void swap(listint_t *left, listint_t *right)
+{
+	if (left->prev != NULL)
+		left->prev->next = right;
+	if (right->next != NULL)
+		right->next->prev = left;
+	left->next = right->next;
+	right->prev = left->prev;
+	left->prev = right;
+	right->next = left;
 }
