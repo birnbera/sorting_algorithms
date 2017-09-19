@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include "sort.h"
-
 #include <stdio.h>
+
+void print_array_long(const size_t *, size_t);
 
 /**
  * counting_sort - Counting sort
@@ -12,8 +13,8 @@
  */
 void counting_sort(int *array, size_t size)
 {
-	int max = 0, oldCount = 0, *output, *count;
-	size_t i, k = 0;
+	int max = 0, *output;
+	size_t i, k, oldCount = 0, *count;
 
 	if (array == NULL || size <= 1)
 		return;
@@ -21,8 +22,8 @@ void counting_sort(int *array, size_t size)
 	for (i = 0; i < size; i++)
 		if (array[i] > max)
 			max = array[i];
-	k = max;
-	count = malloc((k + 1) * sizeof(count));
+	k = (size_t)max;
+	count = malloc((k + 1) * sizeof(size_t));
 	if (count == NULL)
 		return;
 	output = malloc(size * sizeof(int));
@@ -42,7 +43,7 @@ void counting_sort(int *array, size_t size)
 		oldCount = count[i - 1];
 		count[i] = oldCount + count[i];
 	}
-	print_array((const int *)count, k + 1);
+	print_array_long((const size_t *)count, k + 1);
 	for (i = 0; i < size; i++)
 	{
 		output[count[array[i]] - 1] = array[i];
@@ -52,4 +53,22 @@ void counting_sort(int *array, size_t size)
 		array[i] = output[i];
 	free(count);
 	free(output);
+}
+
+/**
+ * print_array_long - prints array of size_t (unsigned long)
+ * @arr: array to print
+ * @size: size of `arr`
+ */
+void print_array_long(const size_t *arr, size_t size)
+{
+	size_t i;
+
+	for (i = 0; i < size; i++)
+	{
+		if (i > 0)
+			printf(", ");
+		printf("%lu", arr[i]);
+	}
+	putchar('\n');
 }
