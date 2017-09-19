@@ -69,10 +69,13 @@ void heap_sort(int *array, size_t size)
 	buildMaxHeap(array, size);
 	for (i = size - 1; i > 0; i--)
 	{
-		tmp = array[0];
-		array[0] = array[i];
-		array[i] = tmp;
-		print_array(array, size);
+		if (array[0] != array[i])
+		{
+			tmp = array[0];
+			array[0] = array[i];
+			array[i] = tmp;
+			print_array(array, size);
+		}
 		siftDown(array, 0, i, size);
 	}
 }
