@@ -1,5 +1,4 @@
 #include "sort.h"
-#include <stdio.h>
 
 void buildMaxHeap(int *, size_t);
 void siftDown(int *, size_t, size_t, size_t);
@@ -69,13 +68,10 @@ void heap_sort(int *array, size_t size)
 	buildMaxHeap(array, size);
 	for (i = size - 1; i > 0; i--)
 	{
-		if (array[0] != array[i])
-		{
-			tmp = array[0];
-			array[0] = array[i];
-			array[i] = tmp;
-			print_array(array, size);
-		}
+		tmp = array[0];
+		array[0] = array[i];
+		array[i] = tmp;
+		print_array(array, size);
 		siftDown(array, 0, i, size);
 	}
 }
