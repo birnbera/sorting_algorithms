@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "sort.h"
 
 void print_array_long(const size_t *, size_t);
@@ -14,7 +15,6 @@ void counting_sort(int *array, size_t size)
 {
 	int max = 0, *output;
 	size_t i, k, oldCount = 0, *count;
-	struct rlimit rlim;
 
 	if (array == NULL || size <= 1)
 		return;
