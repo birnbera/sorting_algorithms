@@ -1,12 +1,19 @@
 #ifndef _DECK_H
 #define _DECK_H
 
+/**
+ * enum kind_e - enumeration of card suits from 0 to 3
+ * @SPADE: 0
+ * @HEART: 1
+ * @CLUB: 2
+ * @DIAMOND: 3
+ */
 typedef enum kind_e
 {
 	SPADE = 0,
 	HEART,
 	CLUB,
-    DIAMOND
+	DIAMOND
 } kind_t;
 
 /**
@@ -35,5 +42,8 @@ typedef struct deck_node_s
 	struct deck_node_s *prev;
 	struct deck_node_s *next;
 } deck_node_t;
+
+void print_deck(const deck_node_t *deck);
+void sort_deck(deck_node_t **deck);
 
 #endif /* _DECK_H */
