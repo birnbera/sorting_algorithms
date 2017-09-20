@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "sort.h"
-#include <stdio.h>
 
 void print_array_long(const size_t *, size_t);
 
@@ -15,6 +14,7 @@ void counting_sort(int *array, size_t size)
 {
 	int max = 0, *output;
 	size_t i, k, oldCount = 0, *count;
+	struct rlimit rlim;
 
 	if (array == NULL || size <= 1)
 		return;
@@ -23,10 +23,10 @@ void counting_sort(int *array, size_t size)
 		if (array[i] > max)
 			max = array[i];
 	k = (size_t)max;
-	count = malloc((k + 1) * sizeof(size_t));
+	count = malloc(sizeof(size_t) * (k + 1));
 	if (count == NULL)
 		return;
-	output = malloc(size * sizeof(int));
+	output = malloc(sizeof(int) * size);
 	if (output == NULL)
 	{
 		free(count);
