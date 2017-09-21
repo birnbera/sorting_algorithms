@@ -30,7 +30,8 @@ size_t findMaxPower10(int *array, size_t size)
  */
 void radix_sort(int *array, size_t size)
 {
-	size_t digit, divisor, base10, i, oldCount, z, *output, count[NUMDIGIT];
+	size_t digit, divisor, base10, i, oldCount, z, count[NUMDIGIT];
+	int *output;
 
 	if (array == NULL || size < 2)
 		return;
