@@ -29,35 +29,44 @@ int partition(int *array, int left, int right, size_t size)
 {
 	int i, j, pivot;
 
-	pivot = array[right];
-	i = left - 1;
-	j = right - 1;
+	if (left >= right)
+		return (left);
+	swap(array, left, right);
+	print_array(array, size);
+	pivot = array[left];
+	i = left;
+	j = right + 1;
 	while (1)
 	{
-		for (i++; i < right; i++)
+		do {
+			i++;
+		} while (array[i] <= pivot && i < right);
+
+		do {
+			j--;
+		} while (array[j] > pivot && j > i);
+
+		if (i == j)
 		{
-			if (array[i] > pivot)
-				break;
+			swap(array, i - 1, left);
+			print_array(array, size);
+			return (i - 1);
 		}
-		for (; j >= i; j--)
+		if (i == right && pivot < array[right])
 		{
-			if (array[j] <= pivot)
-			{
-				swap(array, i, j);
-				print_array(array, size);
-				break;
-			}
-			if (j == i)
-			{
-				swap(array, i, right);
-				print_array(array, size);
-				return (i);
-			}
+			swap(array, left, right - 1);
+			print_array(array, size);
+			return (right - 1);
 		}
-		if (i == right)
-			break;
+		if (i == right && pivot > array[right])
+		{
+			swap(array, left, right);
+			print_array(array, size);
+			return (right);
+		}
+		swap(array, i, j);
+		print_array(array, size);
 	}
-	return (i);
 }
 
 /**
