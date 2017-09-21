@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include "sort.h"
 #define NUMDIGIT 10
@@ -14,16 +13,15 @@
 size_t findMaxPower10(int *array, size_t size)
 {
 	size_t i, base10;
-	int max = array[0], mult;
+	int max = array[0];
 
 	for (i = 1; i < size; i++)
 		if (array[i] > max)
 			max = array[i];
-	for (mult = 1, base10 = 0; max > mult; mult *= 10, base10++)
-		;
+	for (base10 = 0; max > 0; max /= 10)
+		base10++;
 	return (base10);
 }
-
 
 /**
  * radix_sort - sorts data using Radix and prints it out
@@ -34,7 +32,7 @@ void radix_sort(int *array, size_t size)
 {
 	size_t digit, divisor, base10, i, oldCount, z, *output, count[NUMDIGIT];
 
-	if ((array == NULL) || (size < 2))
+	if (array == NULL || size < 2)
 		return;
 	output = malloc(sizeof(int) * size);
 	if (output == NULL)

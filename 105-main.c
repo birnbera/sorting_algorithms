@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sort.h"
+#include <limits.h>
 
 /**
  * main - Entry point
@@ -9,7 +10,7 @@
  */
 int main(void)
 {
-	int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
+	int array[] = {19, INT_MAX, 48, 99, 71, 13, 52, 96, 73, 86, 7};
 	size_t n = sizeof(array) / sizeof(array[0]);
 
 	print_array(array, n);
